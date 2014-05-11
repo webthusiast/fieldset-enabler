@@ -21,6 +21,7 @@
 				value: function() {
 					this._shadowRoot = this.createShadowRoot();
 					this._shadowRoot.appendChild(document.importNode(template.content, true));
+					this._fieldset = this._shadowRoot.children[1];
 					// the 'model' of this component
 					this.enabler.checked = (this.getAttribute('checked') !== null);
 					this._checkedIsEnabled = ((this.getAttribute('checked') !== null) === (this.getAttribute('enabled') !== null))
@@ -44,7 +45,7 @@
 			},
 
 			fieldset: {
-				get: function() { return this._shadowRoot.children[1]; }
+				get: function() { return this._fieldset; }
 			},
 
 			checked: {
@@ -60,12 +61,21 @@
 
 			setEnabled: {
 				value: function() {
+					var inputs = this.querySelectorAll('input, textarea, select');
 					if (this.enabled) {
-						this.fieldset.style.display = this._previous_display;
-						delete this._previous_display;
+						for (var i = 0, input; input = inputs[i]; i ++) {
+							if (input._disabled === true || input._disabled === false) {
+								input.disabled = input._disabled;
+								delete input._disabled;
+							}
+						}
+						this._shadowRoot.appendChild(this._fieldset)
 					} else {
-						this._previous_display = this.fieldset.style.display;
-						this.fieldset.style.display = 'none';
+						for (var i = 0, input; input = inputs[i]; i ++) {
+							input._disabled = input.disabled;
+							input.disabled = true;
+						}
+						this._shadowRoot.removeChild(this._fieldset)
 					}
 				}
 			},
