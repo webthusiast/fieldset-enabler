@@ -1,0 +1,27 @@
+{
+  "name": "fieldset-enabler",
+  "version": "1.0.0",
+  "description": "a web component for enabling/disabling sets of form fields",
+  "main": "fieldset-enabler.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "bower install",
+    "start": "python -m SimpleHTTPServer"
+  },
+  "keywords": [
+    "web",
+    "components",
+    "form",
+    "field",
+    "fieldset",
+    "enable",
+    "disable",
+    "polymer"
+  ],
+  "homepage": "https://github.com/webthusiast/fieldset-enabler",
+  "author": "Roald de Vries <roald@webhtusiast.nl>",
+  "license": "MIT",
+  "dependencies": {
+    "bower": "^1.3.3"
+  }
+}

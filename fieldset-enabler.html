@@ -1,0 +1,79 @@
+<template>
+	<input type="checkbox">
+	<div>
+		<content></content>
+	</div>
+</template>
+
+<!-- a single-range slider -->
+<script type="text/javascript">
+	'use strict';
+
+	// create a local scope
+	(function() {
+		var template = document._currentScript.ownerDocument.querySelector('template');
+
+		var fieldsetEnablerPrototype = Object.create(HTMLElement.prototype, {
+
+			// Event handlers
+
+			createdCallback: {
+				value: function() {
+					this._shadowRoot = this.createShadowRoot();
+					this._shadowRoot.appendChild(document.importNode(template.content, true));
+					// the 'model' of this component
+					this.enabler.checked = (this.getAttribute('checked') !== null);
+					this._checkedIsEnabled = ((this.getAttribute('checked') !== null) === (this.getAttribute('enabled') !== null))
+					// initialize enabledness...
+					this.setEnabled();
+					// ... and stay in sync
+					this.enabler.addEventListener('change', this.checkboxChangedCallback.bind(this));
+				}
+			},
+
+			checkboxChangedCallback: {
+				value: function(e) {
+					this.setEnabled();
+				}
+			},
+
+			// Properties
+
+			enabler: {
+				get: function() { return this._shadowRoot.children[0]; }
+			},
+
+			fieldset: {
+				get: function() { return this._shadowRoot.children[1]; }
+			},
+
+			checked: {
+				get: function() { return this.enabler.checked; },
+				set: function(val) { this.enabler.checked = val; }
+			},
+
+			enabled: {
+				get: function() { return this.checked === (this._checkedIsEnabled); }
+			},
+
+			// Commands
+
+			setEnabled: {
+				value: function() {
+					if (this.enabled) {
+						this.fieldset.style.display = this._previous_display;
+						delete this._previous_display;
+					} else {
+						this._previous_display = this.fieldset.style.display;
+						this.fieldset.style.display = 'none';
+					}
+				}
+			},
+
+		});
+
+		var FieldsetEnabler = document.registerElement('fieldset-enabler', {
+			prototype: fieldsetEnablerPrototype,
+		});
+	})();
+</script>

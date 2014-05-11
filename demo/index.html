@@ -1,0 +1,27 @@
+<!--script>
+	// disable native shadow root for consistency
+	Element.prototype.createShadowRoot = null;
+</script-->
+
+<script src="../bower_components/platform/platform.js"></script>
+<link rel="import" href="../fieldset-enabler.html">
+
+<form method="GET">
+	<fieldset-enabler>
+		<input type="text" name="test1">
+	</fieldset-enabler>
+	<hr>
+	<fieldset-enabler checked>
+		<input type="text" name="test2">
+	</fieldset-enabler>
+	<hr>
+	<fieldset-enabler enabled>
+		<input type="text" name="test3">
+	</fieldset-enabler>
+	<hr>
+	<fieldset-enabler checked enabled>
+		<input type="text" name="test4">
+	</fieldset-enabler>
+	<hr>
+	<input type="submit">
+</form>

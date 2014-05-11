@@ -1,0 +1,24 @@
+{
+  "name": "fieldset-enabler",
+  "version": "1.0.0",
+  "homepage": "https://github.com/webthusiast/fieldset-enabler",
+  "authors": [
+    "Roald de Vries <roald@webthusaist.nl>"
+  ],
+  "description": "a web component for enabling/disabling sets of form fields",
+  "main": "fieldset-enabler.html",
+  "keywords": [
+    "web",
+    "components",
+    "form",
+    "field",
+    "fieldset",
+    "enable",
+    "disable",
+    "polymer"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.2.3"
+  }
+}
